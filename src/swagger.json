@@ -1,0 +1,11 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Chapter2 - Introduction to SOLID - challenge",
+    "description": "This is a challenge to pratice the swagger using",
+    "version": "1.0.0",
+    "contact": {
+      "email": "danilo.s.engenharia@gmail.com"
+    }
+  }
+}

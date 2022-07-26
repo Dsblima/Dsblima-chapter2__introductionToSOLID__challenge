@@ -7,5 +7,169 @@
     "contact": {
       "email": "danilo.s.engenharia@gmail.com"
     }
+  },
+  "paths": {
+    "/users": {
+      "post": {
+        "tags": ["users"],
+        "summary": "Cria um novo usuário",
+        "description": "Cria um novo usuário",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "name": "user name",
+                  "email": "user@email.com"
+                }
+                
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Usuário criado com sucesso!"            
+          },
+          "400": {
+              "description": "Já existe um usuário cadastrado com esse email!"
+          }
+        }
+      },
+      "get": {
+        "tags": ["users"],
+        "summary": "Retorna todos os usuários cadastrados",
+        "description": "Retorna todos os usuários cadastrados, caso o usuário que solicitou seja admin",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "user_id",              
+            "required": true,
+            "schema": {
+                "type": "string"                  
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso!"
+          },          
+          "400": {
+              "description": "Usuário não cadastrado ou sem permissão!!"
+          }
+        }
+      }
+    },
+    "/users/{user_id}": {      
+      "get": {
+        "tags": ["users"],
+        "summary": "Obtem as informações de um usuário",
+        "description": "Obtem as informações de um usuário através do id passado como parâmetro!",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "description": "Id do usuário",              
+            "required": true,
+            "type": "string"            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "type": "string"
+                        }
+                    }
+                  }
+                }
+              }
+            }
+          },          
+          "404": {
+              "description": "Usuário não cadastrado!!"
+          }
+        }
+      }      
+    },
+    "/users/{user_id}/admin": {      
+      "patch": {
+        "tags": ["users"],
+        "summary": "Torna um usuário admin",
+        "description": "Recebe o id do usuário e o torna admin",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "user_id",
+            "description": "Id do usuário",              
+            "required": true,
+            "type": "string"            
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação realizada com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string"
+                        },
+                        "created_at": {
+                          "type": "string"
+                        },
+                        "updated_at": {
+                          "type": "string"
+                        }
+                    }
+                  }
+                }
+              }
+            }
+          },          
+          "404": {
+              "description": "Usuário não cadastrado!!"
+          }
+        }
+      }      
+    }
   }
 }
